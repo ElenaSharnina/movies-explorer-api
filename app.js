@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const userRouter = require('./routes/users');
+const movieRouter = require('./routes/movies');
 const errorHandler = require('./errors/errorHandler');
 const NotFoundError = require('./errors/not-found-error');
 
@@ -13,10 +14,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/users', userRouter);
+app.use('/movies', movieRouter);
 
 // Обработка неправильного пути
 app.use('/*', () => {
-  throw new NotFoundError('Запрашиваемый ресурс не найден.');
+  throw new NotFoundError('Запрашиваемый ресурс не найден');
 });
 
 app.use(errorHandler); // центральный обработчик ошибок
