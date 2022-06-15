@@ -19,7 +19,7 @@ module.exports.createMovie = (req, res, next) => {
     image,
     trailerLink,
     thumbnail,
-    movieID,
+    movieId,
     nameRU,
     nameEN,
   } = req.body;
@@ -34,7 +34,7 @@ module.exports.createMovie = (req, res, next) => {
     image,
     trailerLink,
     thumbnail,
-    movieID,
+    movieId,
     nameRU,
     nameEN,
     owner,
@@ -46,7 +46,8 @@ module.exports.createMovie = (req, res, next) => {
       } else {
         next(err);
       }
-    });
+    })
+    .catch(next);
 };
 
 module.exports.deleteMovie = (req, res, next) => {
