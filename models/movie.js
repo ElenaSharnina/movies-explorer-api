@@ -28,7 +28,6 @@ const movieSchema = new mongoose.Schema({
     validate: {
       validator(v) {
         validator.isURL(v, { require_protocol: true });
-        return /https?\:\/\/(www\.)?\d?\D{1,}#?/.test(v);
       },
     },
   },
@@ -38,7 +37,6 @@ const movieSchema = new mongoose.Schema({
     validate: {
       validator(v) {
         validator.isURL(v, { require_protocol: true });
-        return /https?\:\/\/(www\.)?\d?\D{1,}#?/.test(v);
       },
     },
   },
@@ -48,7 +46,6 @@ const movieSchema = new mongoose.Schema({
     validate: {
       validator(v) {
         validator.isURL(v, { require_protocol: true });
-        return /https?\:\/\/(www\.)?\d?\D{1,}#?/.test(v);
       },
     },
   },

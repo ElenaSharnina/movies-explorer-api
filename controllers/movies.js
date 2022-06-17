@@ -56,8 +56,8 @@ module.exports.deleteMovie = (req, res, next) => {
       if (!movie) {
         throw new NotFoundError('удаление фильма с несуществующим в БД id');
       } else if (JSON.stringify(req.user._id) === JSON.stringify(movie.owner)) {
-        Movie.findByIdAndRemove(req.params.movieId)
-          .then((delMovie) => res.status(200).send(delMovie));
+        return Movie.findByIdAndRemove(req.params.movieId)
+          .then((delMovie) => res.send(delMovie));
       } else {
         throw new ForbiddenError('удаление фильма другого пользователя');
       }

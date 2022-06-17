@@ -7,9 +7,6 @@
       {
         "allow": ["_id"]
       }
-    ],
-    "no-control-regex": 0,
-    "no-useless-escape": 0,
-    "func-names": ["error", "never"]
+    ]
   }
 }

@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const BadRequestError = require('../errors/bad-request-error');
 const ConflictError = require('../errors/conflict-error');
-
+const NotFoundError = require('../errors/not-found-error');
 const UnauthorizedError = require('../errors/unauthorized-error');
 
 module.exports.getUserInfo = (req, res, next) => {
@@ -31,13 +31,22 @@ module.exports.updateUserInfo = (req, res, next) => {
       runValidators: true, // данные будут валидированы перед изменением
       // upsert: true, // если пользователь не найден, он будет создан
     },
-  )
-    .then((user) => res.send({ data: user }))
+  ).then((user) => {
+    if (!user) {
+      throw new NotFoundError('Не существует пользователя с таким id');
+    }
+    res.send(user);
+  })
     .catch((err) => {
       if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные'));
-      } else next(err);
-    });
+        throw new BadRequestError('Переданы некорректные данные');
+      } else if (err.name === 'MongoError' && err.code === 11000) {
+        throw new ConflictError('Пользователь с таким email уже зарегистрирован');
+      } else {
+        next(err);
+      }
+    })
+    .catch(next);
 };
 
 module.exports.login = (req, res, next) => {
