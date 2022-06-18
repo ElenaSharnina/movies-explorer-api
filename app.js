@@ -9,7 +9,7 @@ const routes = require('./routes/routes');
 const errorHandler = require('./errors/errorHandler');
 const { requestLogger, errorLogger } = require('./middlewares/Logger');
 
-const { PORT = 3000 } = process.env;
+const { PORT, MONGO_URL } = require('./utils/config');
 
 const app = express();
 
@@ -25,7 +25,7 @@ app.use(errors()); // из celebrate
 app.use(errorHandler); // центральный обработчик ошибок
 
 async function main() {
-  mongoose.connect('mongodb://localhost:27017/moviedb', {
+  mongoose.connect(MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: false,
   });
