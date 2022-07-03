@@ -15,7 +15,7 @@ const { PORT, MONGO_URL } = require('./utils/config');
 const app = express();
 
 app.use(cors({
-  origin: ['*'],
+  origin: '*',
   credentials: true,
 }));
 
