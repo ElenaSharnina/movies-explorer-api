@@ -13,6 +13,11 @@ const { PORT, MONGO_URL } = require('./utils/config');
 
 const app = express();
 
+app.use(cors({
+  origin: ['http://mydiploma.nomoredomains.xyz', 'https://mydiploma.nomoredomains.xyz', 'http://localhost:3001'],
+  credentials: true,
+}));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
