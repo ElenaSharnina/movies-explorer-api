@@ -2,6 +2,7 @@ require('dotenv').config();
 
 console.log(process.env.NODE_ENV);
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const { errors } = require('celebrate');
@@ -14,7 +15,7 @@ const { PORT, MONGO_URL } = require('./utils/config');
 const app = express();
 
 app.use(cors({
-  origin: ['http://mydiploma.nomoredomains.xyz', 'https://mydiploma.nomoredomains.xyz', 'http://localhost:3001'],
+  origin: ['*'],
   credentials: true,
 }));
 
